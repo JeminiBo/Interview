@@ -17,7 +17,7 @@ const JavaScriptScreen = () => {
       dispatch(getTopic('javascript'));
     }
   }, [javascriptTopic]);
-  
+
   return (
     <View style={styles.wrapper}>
       <FlatList

@@ -15,20 +15,26 @@ export interface TopicsState {
   isTopicLoading: boolean;
 }
 
+const initTopics = {
+  javascript: { title: 'javascript', questions: [] },
+  typescript: { title: 'typescript', questions: [] },
+  react: { title: 'react', questions: [] },
+  'react-native': { title: 'react-native', questions: [] },
+};
+
 const initialState: TopicsState = {
-  topics: {
-    javascript: { title: 'javascript', questions: [] },
-    typescript: { title: 'typescript', questions: [] },
-    react: { title: 'react', questions: [] },
-    'react-native': { title: 'react-native', questions: [] },
-  },
+  topics: initTopics,
   isTopicLoading: false,
 };
 
 export const topicsSlice = createSlice({
   name: 'topics',
   initialState,
-  reducers: {},
+  reducers: {
+    clearTopics: (state) => {
+      state.topics = initTopics;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getTopic.pending, (state) => {
       state.isTopicLoading = true;
@@ -55,5 +61,7 @@ const getTopic = createAsyncThunk<Topic, string, { state: RootState }>(
 );
 
 export { getTopic };
+
+export const { clearTopics } = topicsSlice.actions;
 
 export default topicsSlice.reducer;
