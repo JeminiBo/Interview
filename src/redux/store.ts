@@ -1,15 +1,45 @@
 import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import { combineReducers } from 'redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TopicsReducer from './topics/topicsSlice';
 import SettingsReducer from './settings/settingsSlice';
 
-export const store = configureStore({
-  reducer: {
-    topics: TopicsReducer,
-    settings: SettingsReducer,
-  },
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['topics', 'settings'],
+};
+
+const rootReducer = combineReducers({
+  topics: TopicsReducer,
+  settings: SettingsReducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
+
+
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+
 export type AppDispatch = typeof store.dispatch;

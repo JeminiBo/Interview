@@ -3,14 +3,14 @@ import React from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   useColorScheme,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { MainDrawer } from './src/router';
 import { COLORS } from './src/assets/colors';
 import { Provider } from 'react-redux';
-import { store } from './src/redux/store';
+import { store, persistor } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,31 +27,14 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <Provider store={store}>
-        <NavigationContainer>
-          <MainDrawer />
-        </NavigationContainer>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <MainDrawer />
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

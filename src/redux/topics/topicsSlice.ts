@@ -35,7 +35,7 @@ export const topicsSlice = createSlice({
     });
     builder.addCase(getTopic.fulfilled, (state, { payload }) => {
       state.isTopicLoading = false;
-      state.topics[payload.title] = payload;
+      state.topics[payload.title.toLowerCase()] = payload;
     });
   },
 });
