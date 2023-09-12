@@ -2,13 +2,12 @@ export const QUESTIONS_DATA = [
   {
     question:
       'Explain what is Javascript? List some data types supported by Javascript?',
-    answer:
-      '   JavaScript is a client-side as well as server side scripting language that can be inserted into HTML pages and is understood by web browsers. JavaScript is also an Object based Programming language.\n    Below is the list of data types supported by Javascript:\n  • Undefined\n  • Null\n  • Boolean\n  • String\n  • Number\n  • Symbol\n  • Object',
+    answer: `<p>JavaScript is a client-side as well as server side scripting language that can be inserted into HTML pages and is understood by web browsers.JavaScript is also an Object based Programming language.</p><p>Below is the list of data types supported by Javascript:</p><ul><li>Undefined</li><li>Null</li><li>Boolean</li><li>String</li><li>Number</li><li>Symbol</li><li>Object</li></ul>`,
   },
   {
     question: 'What is the difference between let and var?',
     answer:
-      'Both var and let are used for variable/ method declaration in javascript but the main difference between let and var is that var is function scoped whereas let is block scoped.',
+      '<p>Both var and let are used for variable/ method declaration in javascript but the main difference between let and var is that var is function scoped whereas let is block scoped.</p>',
   },
   {
     question: 'Explain Closures in JavaScript?',

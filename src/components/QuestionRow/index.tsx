@@ -7,6 +7,23 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { styles } from './styles';
+import { useWindowDimensions } from 'react-native';
+import RenderHtml from 'react-native-render-html';
+
+const tagsStyles = {
+  body: { marginBottom: 0, paddingTop: 0, paddingBottom: 0 },
+  p: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    marginTop: 0,
+    marginBottom: 8,
+  },
+  ul: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
+  div: { marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 },
+};
 
 interface Props {
   question: string;
@@ -15,7 +32,8 @@ interface Props {
 }
 
 export const QuestionRow = (props: Props) => {
-  const { question, answer, image } = props;
+  const { question, answer } = props;
+  const { width } = useWindowDimensions();
   const { animatedRef, setHeight, isOpened, animatedHeightStyle } =
     useAccordion();
   const animatedChevronStyle = useAnimatedStyle(() => ({
@@ -41,21 +59,13 @@ export const QuestionRow = (props: Props) => {
             ref={animatedRef}
             collapsable={false}
             style={styles.contentWrapper}>
-            {!!answer && <Text style={styles.description}>{answer}</Text>}
-            {image && (
-              <View
-                style={{
-                  width: '100%',
-                  height: 200,
-                  flexDirection: 'row',
-                }}>
-                <Image
-                  source={image}
-                  style={styles.image}
-                  resizeMode="contain"
-                />
-              </View>
-            )}
+            <RenderHtml
+              contentWidth={width - 64}
+              source={{
+                html: `<div style='color: white; font-size: 16px'>${answer}<div>`,
+              }}
+              tagsStyles={tagsStyles}
+            />
           </View>
         </View>
       </Animated.View>
