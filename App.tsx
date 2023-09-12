@@ -9,6 +9,8 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { MainDrawer } from './src/router';
 import { COLORS } from './src/assets/colors';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,9 +26,11 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <NavigationContainer>
-        <MainDrawer />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <MainDrawer />
+        </NavigationContainer>
+      </Provider>
     </SafeAreaView>
   );
 }
