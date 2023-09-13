@@ -48,62 +48,62 @@ export const QUESTIONS_DATA = [
   {
     question: 'What is `this` keyword in JavaScript?',
     answer:
-      '<p><b>`This`</b> keyword refers to the object from where it was called.</p>',
+      '<p>&ensp; <b>`This`</b> keyword refers to the object from where it was called.</p>',
   },
   {
     question: 'Explain the difference between "==" and "==="?',
     answer:
-      '<p><b>"=="</b> checks only for equality in value whereas <b>"==="</b> is a stricter equality test and returns false if either the value or the type of the two variables are different.</p>',
+      '<p>&ensp; <b>"=="</b> checks only for equality in value whereas <b>"==="</b> is a stricter equality test and returns false if either the value or the type of the two variables are different.</p>',
   },
   {
     question: 'What is the difference between .call() and .apply()?',
     answer:
-      '<p>The function .call() and .apply() are very similar in their usage except a little difference. .call() is used when the number of the function`s arguments are known to the programmer, as they have to be mentioned as arguments in the call statement. On the other hand, .apply() is used when the number is not known. The function .apply() expects the argument to be an array.</p>',
+      '<p>&ensp; The function .call() and .apply() are very similar in their usage except a little difference. .call() is used when the number of the function`s arguments are known to the programmer, as they have to be mentioned as arguments in the call statement. On the other hand, .apply() is used when the number is not known. The function .apply() expects the argument to be an array.</p>',
   },
   {
     question: 'Define event bubbling?',
     answer:
-      '<p>JavaScript allows DOM elements to be nested inside each other. In such a case, if the handler of the child is clicked, the handler of parent will also work as if it were clicked too.</p>',
+      '<p>&ensp; JavaScript allows DOM elements to be nested inside each other. In such a case, if the handler of the child is clicked, the handler of parent will also work as if it were clicked too.</p>',
   },
   {
     question: 'What is an event loop?',
     answer:
-      '<p>An event loop is a programming construct that allows a program to handle multiple events or tasks simultaneously. It works by having the program keep track of all the events or tasks that need to be processed, and then processing them one by one as they come in. This can be a very efficient way to handle a lot of events or tasks, as it prevents the program from getting bogged down by having to process everything at once.</p>',
+      '<p>&ensp; An event loop is a programming construct that allows a program to handle multiple events or tasks simultaneously. It works by having the program keep track of all the events or tasks that need to be processed, and then processing them one by one as they come in. This can be a very efficient way to handle a lot of events or tasks, as it prevents the program from getting bogged down by having to process everything at once.</p>',
   },
   {
     question: 'Can you explain how a JavaScript event loop works?',
     answer:
-      '<p>The event loop is a mechanism that allows JavaScript to perform non-blocking operations. When an asynchronous task is started, the event loop will start running. Once the task is completed, the event loop will again check for any other tasks that need to be performed. This process will continue until all tasks have been completed.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/Javascript-event-loop.png?alt=media&token=fd4d90d4-6a03-4b4a-8fc1-b4b385a40eb9"/>',
+      '<p>&ensp; The event loop is a mechanism that allows JavaScript to perform non-blocking operations. When an asynchronous task is started, the event loop will start running. Once the task is completed, the event loop will again check for any other tasks that need to be performed. This process will continue until all tasks have been completed.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/Javascript-event-loop.png?alt=media&token=fd4d90d4-6a03-4b4a-8fc1-b4b385a40eb9"/>',
   },
   {
     question: 'What is a Microtask in JavaScript?',
-    answer: `<p>A Microtask in JavaScript is a short, non-blocking task that's executed between tasks in the Event Loop, typically associated with resolving Promises and mutation observers.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/microtask.png?alt=media&token=c8610172-2347-4b54-8b0a-615b2fce0cb0" />`,
+    answer: `<p>&ensp; A Microtask in JavaScript is a short, non-blocking task that's executed between tasks in the Event Loop, typically associated with resolving Promises and mutation observers.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/microtask.png?alt=media&token=c8610172-2347-4b54-8b0a-615b2fce0cb0" />`,
   },
   {
     question: 'What is a Macrotask in JavaScript?',
     answer:
-      '<p>A macrotask in JavaScript refers to a unit of work that is scheduled and executed asynchronously, typically involving I/O operations or rendering updates, using mechanisms like timers or event listeners.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/Screenshot%20from%202023-09-13%2012-27-34.png?alt=media&token=22fc5131-92f4-4fd8-908d-1f1182222111"/>',
+      '<p>&ensp; A macrotask in JavaScript refers to a unit of work that is scheduled and executed asynchronously, typically involving I/O operations or rendering updates, using mechanisms like timers or event listeners.</p><img src="https://firebasestorage.googleapis.com/v0/b/interview-a7ac9.appspot.com/o/Screenshot%20from%202023-09-13%2012-27-34.png?alt=media&token=22fc5131-92f4-4fd8-908d-1f1182222111"/>',
   },
   {
     question:
       'What is the difference between a microtask and a task (macrotask) in the Event Loop?',
     answer:
-      '<p>Microtasks and Macrotasks are both tasks in the Event Loop. Microtasks have higher priority and execute between Macro-tasks, often associated with Promise resolutions and mutation observers. Tasks include callbacks from setTimeout, setInterval, and other Web APIs.</p>',
+      '<p>&ensp; Microtasks and Macrotasks are both tasks in the Event Loop. Microtasks have higher priority and execute between Macro-tasks, often associated with Promise resolutions and mutation observers. Tasks include callbacks from setTimeout, setInterval, and other Web APIs.</p>',
   },
   {
     question: 'What is a callback function?',
     answer:
-      '<p>A callback function is a function that is passed as an argument to another function. The callback function is then invoked inside of the other function. Callback functions are often used in event-driven programming, such as in the browser when handling user events.</p>',
+      '<p>&ensp; A callback function is a function that is passed as an argument to another function. The callback function is then invoked inside of the other function. Callback functions are often used in event-driven programming, such as in the browser when handling user events.</p>',
   },
   {
     question:
       'Can you explain the difference between callbacks and promises? Which one would you choose for asynchronously executing code in a NodeJS application?',
     answer:
-      '<p>Callbacks are functions that are executed after a certain event has occurred. Promises are similar to callbacks, but they provide a more convenient way to handle asynchronous code. With promises, you can chain together multiple asynchronous operations, and you can be sure that the code will execute in the order that you expect. For these reasons, promises are generally the better choice for asynchronously executing code in a NodeJS application.</p>',
+      '<p>&ensp; Callbacks are functions that are executed after a certain event has occurred. Promises are similar to callbacks, but they provide a more convenient way to handle asynchronous code. With promises, you can chain together multiple asynchronous operations, and you can be sure that the code will execute in the order that you expect. For these reasons, promises are generally the better choice for asynchronously executing code in a NodeJS application.</p>',
   },
   {
     question: 'Can you explain how setTimeout() works?',
     answer:
-      '<p>The <b>setTimeout()</b> function takes two arguments: a callback function and a delay in milliseconds. The callback function is executed once the delay has elapsed. The delay is not guaranteed to be accurate, but is usually within a few milliseconds.</p>',
+      '<p>&ensp; The <b>setTimeout()</b> function takes two arguments: a callback function and a delay in milliseconds. The callback function is executed once the delay has elapsed. The delay is not guaranteed to be accurate, but is usually within a few milliseconds.</p>',
   },
 ];

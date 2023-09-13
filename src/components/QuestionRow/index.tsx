@@ -25,6 +25,9 @@ const tagsStyles = {
   },
   li: {},
   div: { marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 },
+  img: {
+    marginTop: 10
+  }
 };
 
 interface Props {
