@@ -21,7 +21,9 @@ const tagsStyles = {
   ul: {
     marginTop: 0,
     marginBottom: 0,
+    overflow: 'scroll',
   },
+  li: {},
   div: { marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 },
 };
 
@@ -64,6 +66,7 @@ export const QuestionRow = (props: Props) => {
               source={{
                 html: `<div style='color: white; font-size: 16px'>${answer}<div>`,
               }}
+              // @ts-ignore
               tagsStyles={tagsStyles}
             />
           </View>
