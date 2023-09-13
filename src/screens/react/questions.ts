@@ -1,5 +1,3 @@
-import Image1 from './assets/image1.png';
-
 export const QUESTIONS_DATA = [
   {
     question: 'What is React?',

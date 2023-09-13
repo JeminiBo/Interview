@@ -1,4 +1,3 @@
-
 export const QUESTIONS_DATA = [
   {
     question: 'What is react-native?',
