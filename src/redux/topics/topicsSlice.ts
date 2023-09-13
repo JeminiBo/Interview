@@ -20,6 +20,7 @@ const initTopics = {
   typescript: { title: 'typescript', questions: [] },
   react: { title: 'react', questions: [] },
   'react-native': { title: 'react-native', questions: [] },
+  redux: { title: 'redux', questions: [] },
 };
 
 const initialState: TopicsState = {
