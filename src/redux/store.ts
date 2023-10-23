@@ -12,16 +12,18 @@ import {
 import { combineReducers } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TopicsReducer from './topics/topicsSlice';
+import TopicsQuestionsReducer from './topicsQuestions/topicsQuestionsSlice';
 import SettingsReducer from './settings/settingsSlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['topics', 'settings'],
+  whitelist: ['topics', 'topicsQuestions', 'settings'],
 };
 
 const rootReducer = combineReducers({
   topics: TopicsReducer,
+  topicsQuestions: TopicsQuestionsReducer,
   settings: SettingsReducer,
 });
 
@@ -38,7 +40,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
 
 export type RootState = ReturnType<typeof store.getState>;
 

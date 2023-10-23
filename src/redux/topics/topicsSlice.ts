@@ -5,27 +5,18 @@ import { RootState } from '../store';
 
 type Topic = {
   title: string;
-  questions: { question: string; answer: string }[];
+  key: string;
+  id: string;
 };
 
 export interface TopicsState {
-  topics: {
-    [key: string]: Topic;
-  };
-  isTopicLoading: boolean;
+  topics: Topic[];
+  isTopicsLoading: boolean;
 }
 
-const initTopics = {
-  javascript: { title: 'javascript', questions: [] },
-  typescript: { title: 'typescript', questions: [] },
-  react: { title: 'react', questions: [] },
-  'react-native': { title: 'react-native', questions: [] },
-  redux: { title: 'redux', questions: [] },
-};
-
 const initialState: TopicsState = {
-  topics: initTopics,
-  isTopicLoading: false,
+  topics: [],
+  isTopicsLoading: false,
 };
 
 export const topicsSlice = createSlice({
@@ -33,35 +24,41 @@ export const topicsSlice = createSlice({
   initialState,
   reducers: {
     clearTopics: (state) => {
-      state.topics = initTopics;
+      state.topics = [];
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getTopic.pending, (state) => {
-      state.isTopicLoading = true;
+    builder.addCase(getTopics.pending, (state) => {
+      state.isTopicsLoading = true;
     });
-    builder.addCase(getTopic.fulfilled, (state, { payload }) => {
-      state.isTopicLoading = false;
-      state.topics[payload.title.toLowerCase()] = payload;
+    builder.addCase(getTopics.fulfilled, (state, { payload }) => {
+      state.isTopicsLoading = false;
+      state.topics = payload;
+    });
+    builder.addCase(getTopics.rejected, (state) => {
+      state.isTopicsLoading = false;
     });
   },
 });
 
-const getTopic = createAsyncThunk<Topic, string, { state: RootState }>(
-  'topics/getTopic',
-  async (topicName: string) => {
-    const topic: Topic = await firestore()
+const getTopics = createAsyncThunk<Topic[], void, { state: RootState }>(
+  'topics/getTopicQuestions',
+  async () => {
+    const topics: Topic[] = await firestore()
       .collection('topics')
-      .doc(topicName.toLowerCase())
       .get()
       .then((snapshot) => {
-        return snapshot.data() as Topic;
+        const topicsData = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        return topicsData as Topic[];
       });
-    return topic;
+    return topics;
   },
 );
 
-export { getTopic };
+export { getTopics };
 
 export const { clearTopics } = topicsSlice.actions;
 

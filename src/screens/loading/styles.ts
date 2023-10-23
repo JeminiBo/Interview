@@ -6,12 +6,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: COLORS.main,
-  },
-  listContent: {
-    gap: 20,
-    paddingHorizontal: 16,
-    marginTop: 20,
-    paddingBottom: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
