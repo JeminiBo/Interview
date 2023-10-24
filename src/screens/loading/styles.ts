@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: COLORS.white,
+    fontSize: 20,
+    marginTop: 20,
+  },
 });
 
 export { styles };

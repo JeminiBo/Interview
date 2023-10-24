@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import BootSplash from 'react-native-bootsplash';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { LoadingScreen } from '../screens/loading';
 import { TopicScreen } from '../screens/topic';
@@ -18,9 +19,15 @@ function MainDrawer() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    BootSplash.hide({ fade: true });
     checkUpdates();
-    dispatch(getTopics());
   }, []);
+
+  useEffect(() => {
+    if (topics.length === 0) {
+      dispatch(getTopics());
+    }
+  }, [topics]);
 
   const checkUpdates = async () => {
     const dbSettings = await getDbSettings();
