@@ -18,7 +18,7 @@ const TopicScreen = ({ route }: Props) => {
   const topic = topicsQuestions?.[topicKey];
 
   useEffect(() => {
-    if (topic?.questions?.length === 0) {
+    if (topic?.questions?.length === 0 || !topic) {
       dispatch(getTopicQuestions(topicKey));
     }
   }, [topic]);
@@ -26,7 +26,7 @@ const TopicScreen = ({ route }: Props) => {
   return (
     <View style={styles.wrapper}>
       <FlatList
-        data={topic.questions}
+        data={topic?.questions}
         renderItem={({ item }) => <QuestionRow {...item} />}
         keyExtractor={(_, index) => `${topicKey}_${index}`}
         contentContainerStyle={styles.listContent}
