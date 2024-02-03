@@ -15,10 +15,25 @@ import { clearTopics, getTopics } from '../redux/topics/topicsSlice';
 import { QuizChoosing } from '../screens/quizChoosing';
 import { Header } from '../components/layouts/Header';
 import { Profile } from '../screens/profile';
+import { TopicsStatistic } from '../screens/topicStatistic';
+import { Quiz } from '../screens/quiz';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="TopicStatistic"
+        component={TopicsStatistic}
+        initialParams={{ title: '', progress: 0 }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const DrawerStack = () => {
   const { topics } = useAppSelector((state) => state.topics);
@@ -74,11 +89,11 @@ const TabStack = () => {
         tabBarLabelStyle: {
           fontSize: 12,
           lineHeight: 12,
-          color: 'white'
+          color: 'white',
         },
       }}>
       <Tab.Screen name="Learning" component={DrawerStack} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
@@ -133,19 +148,29 @@ function MainDrawer() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="LearningsTab"
+        name="Tabs"
         component={TabStack}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="QuizChoosingModal"
-        component={QuizChoosing}
-        options={{
-          presentation: 'transparentModal',
-          headerShown: false,
-          animation: 'none',
-        }}
-      />
+      <Stack.Group>
+        <Stack.Screen
+          name="QuizChoosingModal"
+          component={QuizChoosing}
+          options={{
+            presentation: 'transparentModal',
+            headerShown: false,
+            animation: 'none',
+          }}
+        />
+        <Stack.Screen
+          name="Quiz"
+          component={Quiz}
+          options={{
+            headerShown: false,
+          }}
+          initialParams={{title: ''}}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
