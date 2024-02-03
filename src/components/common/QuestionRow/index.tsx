@@ -1,6 +1,6 @@
-import { Pressable, Text, View, Image } from 'react-native';
-import ChevronRight from '../../assets/icons/chevron-right.svg';
-import { useAccordion } from '../../hooks/useAccordion';
+import { Pressable, Text, View } from 'react-native';
+import ChevronRight from '../../../assets/icons/chevron-right.svg';
+import { useAccordion } from '../../../hooks/useAccordion';
 import Animated, {
   runOnUI,
   useAnimatedStyle,

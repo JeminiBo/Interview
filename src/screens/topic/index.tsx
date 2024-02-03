@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { View, FlatList, ActivityIndicator } from 'react-native';
-import { QuestionRow } from '../../components/QuestionRow';
+import { QuestionRow } from '../../components/common/QuestionRow';
 import { styles } from './styles';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getTopicQuestions } from '../../redux/topicsQuestions/topicsQuestionsSlice';
