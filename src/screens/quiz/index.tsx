@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,34 @@ import {
 import { COLORS } from '../../assets/colors';
 import BackArrow from '../../assets/icons/back-arrow.svg';
 import RadioGroup from 'react-native-radio-buttons-group';
+import PagerView from 'react-native-pager-view';
+
+const quiz = [
+  {
+    id: 1,
+    answers: [
+      { answer: 'Answer1', isCorrect: false },
+      { answer: 'Answer2', isCorrect: false },
+      { answer: 'Answer3', isCorrect: true },
+    ],
+  },
+  {
+    id: 2,
+    answers: [
+      { answer: 'Answer4', isCorrect: false },
+      { answer: 'Answer5', isCorrect: true },
+      { answer: 'Answer6', isCorrect: false },
+    ],
+  },
+  {
+    id: 3,
+    answers: [
+      { answer: 'Answer7', isCorrect: true },
+      { answer: 'Answer8', isCorrect: false },
+      { answer: 'Answer9', isCorrect: false },
+    ],
+  },
+];
 
 const Quiz = ({
   navigation,
@@ -45,48 +73,70 @@ const Quiz = ({
   );
 
   const [selectedId, setSelectedId] = useState<string | undefined>();
+  const pagerRef = useRef<PagerView>();
   return (
     <ScrollView
       style={styles.wrapper}
       contentContainerStyle={{
-        justifyContent: 'space-between',
-        gap: 20,
         flexGrow: 1,
       }}>
-      <View>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <BackArrow height={25} width={25} />
-          </TouchableOpacity>
-          <Text style={styles.title}>{title} Quiz</Text>
-          <View style={styles.mockRightAction} />
-        </View>
-        <View style={styles.video} />
-
-        <RadioGroup
-          radioButtons={radioButtons}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-          labelStyle={labelStyle}
-          containerStyle={{ alignItems: 'flex-start', gap: 15 }}
-        />
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <BackArrow height={25} width={25} />
+        </TouchableOpacity>
+        <Text style={styles.title}>{title} Quiz</Text>
+        <View style={styles.mockRightAction} />
       </View>
-      <TouchableOpacity
-        disabled={!selectedId}
-        style={{
-          height: 60,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 20,
-          backgroundColor: COLORS.main,
-        }}>
-        <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
-          Next question
-        </Text>
-      </TouchableOpacity>
+      <PagerView
+        ref={pagerRef}
+        style={{ flex: 1 }}
+        initialPage={0}
+        scrollEnabled={false}>
+        {quiz.map((item, index) => {
+          return (
+            <View
+              key={item.id}
+              style={{ justifyContent: 'space-between', gap: 20 }}>
+              <View>
+                <View style={styles.video} />
+                <RadioGroup
+                  radioButtons={item.answers.map((item, index) => ({
+                    id: `${index}`,
+                    label: item.answer,
+                    value: item.answer,
+                    ...radioStyles,
+                  }))}
+                  onPress={setSelectedId}
+                  selectedId={selectedId}
+                  labelStyle={labelStyle}
+                  containerStyle={{ alignItems: 'flex-start', gap: 15 }}
+                />
+              </View>
+              <TouchableOpacity
+                disabled={!selectedId}
+                style={{
+                  height: 60,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 20,
+                  backgroundColor: COLORS.main,
+                }}
+                onPress={() => {
+                  console.log('SDSD', pagerRef?.current);
+                  pagerRef?.current?.setPage(index + 1);
+                }}>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
+                  Next question
+                </Text>
+              </TouchableOpacity>
+            </View>
+          );
+        })}
+      </PagerView>
     </ScrollView>
   );
 };
