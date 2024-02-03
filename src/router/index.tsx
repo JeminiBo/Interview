@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { LoadingScreen } from '../screens/loading';
 import { TopicScreen } from '../screens/topic';
@@ -13,9 +14,11 @@ import { setVersion } from '../redux/settings/settingsSlice';
 import { clearTopics, getTopics } from '../redux/topics/topicsSlice';
 import { QuizChoosing } from '../screens/quizChoosing';
 import { Header } from '../components/layouts/Header';
+import { Profile } from '../screens/profile';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const DrawerStack = () => {
   const { topics } = useAppSelector((state) => state.topics);
@@ -59,6 +62,24 @@ const DrawerStack = () => {
         />
       ))}
     </Drawer.Navigator>
+  );
+};
+
+const TabStack = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { backgroundColor: COLORS.secondary },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          lineHeight: 12,
+          color: 'white'
+        },
+      }}>
+      <Tab.Screen name="Learning" component={DrawerStack} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
   );
 };
 
@@ -112,8 +133,8 @@ function MainDrawer() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Questions"
-        component={DrawerStack}
+        name="LearningsTab"
+        component={TabStack}
         options={{ headerShown: false }}
       />
       <Stack.Screen
