@@ -17,6 +17,8 @@ import { Header } from '../components/layouts/Header';
 import { Profile } from '../screens/profile';
 import { TopicsStatistic } from '../screens/topicStatistic';
 import { Quiz } from '../screens/quiz';
+import BookIcon from '../assets/icons/book.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -86,15 +88,32 @@ const TabStack = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: COLORS.secondary },
+        tabBarStyle: { backgroundColor: COLORS.secondary, paddingBottom: 3 },
         tabBarLabelStyle: {
           fontSize: 12,
           lineHeight: 12,
-          color: 'white',
         },
+        tabBarActiveTintColor: COLORS.white,
+        tabBarInactiveTintColor: 'grey',
       }}>
-      <Tab.Screen name="Learning" component={DrawerStack} />
-      <Tab.Screen name="Profile" component={ProfileStack} />
+      <Tab.Screen
+        name="Learning"
+        component={DrawerStack}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <BookIcon width={20} height={20} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <ProfileIcon width={20} height={20} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
