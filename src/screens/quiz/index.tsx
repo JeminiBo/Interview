@@ -49,23 +49,6 @@ const Quiz = ({
     color: COLORS.white,
     fontWeight: '600',
   };
-  const radioButtons = useMemo(
-    () => [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Answer 1',
-        value: 'option1',
-        ...radioStyles,
-      },
-      {
-        id: '2',
-        label: 'Answer 2',
-        value: 'option2',
-        ...radioStyles,
-      },
-    ],
-    [],
-  );
 
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const pagerRef = useRef<PagerView>();
@@ -112,8 +95,9 @@ const Quiz = ({
                 disabled={!selectedId}
                 style={styles.continueButton}
                 onPress={() => {
-                  pagerRef?.current?.setPage(index + 1);
-                }}>
+                  pagerRef?.current?.setPageWithoutAnimation(index + 1);
+                }}
+                activeOpacity={0.8}>
                 <Text style={styles.continueButtonText}>Next question</Text>
               </TouchableOpacity>
             </View>
