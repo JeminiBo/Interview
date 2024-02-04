@@ -1,15 +1,10 @@
 import React, { useState, useMemo, useRef } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { COLORS } from '../../assets/colors';
 import BackArrow from '../../assets/icons/back-arrow.svg';
 import RadioGroup from 'react-native-radio-buttons-group';
 import PagerView from 'react-native-pager-view';
+import { styles } from './styles';
 
 const quiz = [
   {
@@ -77,9 +72,7 @@ const Quiz = ({
   return (
     <ScrollView
       style={styles.wrapper}
-      contentContainerStyle={{
-        flexGrow: 1,
-      }}>
+      contentContainerStyle={styles.listContent}>
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
@@ -92,7 +85,7 @@ const Quiz = ({
       </View>
       <PagerView
         ref={pagerRef}
-        style={{ flex: 1 }}
+        style={styles.page}
         initialPage={0}
         scrollEnabled={false}>
         {quiz.map((item, index) => {
@@ -112,26 +105,16 @@ const Quiz = ({
                   onPress={setSelectedId}
                   selectedId={selectedId}
                   labelStyle={labelStyle}
-                  containerStyle={{ alignItems: 'flex-start', gap: 15 }}
+                  containerStyle={styles.radioButtons}
                 />
               </View>
               <TouchableOpacity
                 disabled={!selectedId}
-                style={{
-                  height: 60,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 20,
-                  backgroundColor: COLORS.main,
-                }}
+                style={styles.continueButton}
                 onPress={() => {
-                  console.log('SDSD', pagerRef?.current);
                   pagerRef?.current?.setPage(index + 1);
                 }}>
-                <Text
-                  style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
-                  Next question
-                </Text>
+                <Text style={styles.continueButtonText}>Next question</Text>
               </TouchableOpacity>
             </View>
           );
@@ -140,31 +123,5 @@ const Quiz = ({
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: { flex: 1, backgroundColor: COLORS.secondary, padding: 20 },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  title: {
-    fontSize: 18,
-    color: 'white',
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  mockRightAction: {
-    height: 25,
-    width: 25,
-  },
-  video: {
-    height: 300,
-    width: '100%',
-    borderRadius: 30,
-    marginVertical: 30,
-    backgroundColor: 'black',
-  },
-});
 
 export { Quiz };

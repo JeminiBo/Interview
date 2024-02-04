@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { COLORS } from '../../assets/colors';
 import BackArrow from '../../assets/icons/back-arrow.svg';
 import * as Progress from 'react-native-progress';
+import { mockTopics } from '../profile/mock';
 
 const TopicsStatistic = ({
   route: {
@@ -10,8 +17,11 @@ const TopicsStatistic = ({
   },
   navigation,
 }) => {
+  const topic = mockTopics.find((item) => item.title === title);
   return (
-    <View style={styles.wrapper}>
+    <ScrollView
+      style={styles.wrapper}
+      contentContainerStyle={{ paddingBottom: 60 }}>
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
@@ -31,7 +41,38 @@ const TopicsStatistic = ({
           size={200}
         />
       </View>
-    </View>
+      <View style={styles.answersWrapper}>
+        {topic.statistic.map((item) => {
+          return (
+            <View key={item.level}>
+              <Text style={{ fontSize: 16, color: 'white', fontWeight: '600' }}>
+                {item.level}
+              </Text>
+              <View style={{ marginTop: 20, gap: 12 }}>
+                {item.answers.map((item) => {
+                  return (
+                    <View
+                      key={item.question}
+                      style={{
+                        width: '100%',
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                        paddingHorizontal: 15,
+                        borderRadius: 20,
+                        backgroundColor: item.isCorrect ? '#8FCC33' : '#F67F6F',
+                        minHeight: 50,
+                        alignItems: 'center',
+                      }}>
+                      <Text>{item.question}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -60,6 +101,9 @@ const styles = StyleSheet.create({
   statisticCircle: {
     alignItems: 'center',
     marginTop: 40,
+  },
+  answersWrapper: {
+    gap: 30,
   },
 });
 

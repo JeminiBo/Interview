@@ -30,6 +30,7 @@ const ProfileStack = () => {
         name="TopicStatistic"
         component={TopicsStatistic}
         initialParams={{ title: '', progress: 0 }}
+        options={{ animation: 'none' }}
       />
     </Stack.Navigator>
   );
@@ -168,7 +169,7 @@ function MainDrawer() {
           options={{
             headerShown: false,
           }}
-          initialParams={{title: ''}}
+          initialParams={{ title: '' }}
         />
       </Stack.Group>
     </Stack.Navigator>
