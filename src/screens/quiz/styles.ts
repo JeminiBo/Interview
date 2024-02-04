@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginVertical: 30,
     backgroundColor: 'black',
+    overflow: 'hidden',
   },
   radioButtons: {
     alignItems: 'flex-start',
@@ -42,6 +43,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });
 

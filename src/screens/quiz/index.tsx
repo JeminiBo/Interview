@@ -5,33 +5,9 @@ import BackArrow from '../../assets/icons/back-arrow.svg';
 import RadioGroup from 'react-native-radio-buttons-group';
 import PagerView from 'react-native-pager-view';
 import { styles } from './styles';
-
-const quiz = [
-  {
-    id: 1,
-    answers: [
-      { answer: 'Answer1', isCorrect: false },
-      { answer: 'Answer2', isCorrect: false },
-      { answer: 'Answer3', isCorrect: true },
-    ],
-  },
-  {
-    id: 2,
-    answers: [
-      { answer: 'Answer4', isCorrect: false },
-      { answer: 'Answer5', isCorrect: true },
-      { answer: 'Answer6', isCorrect: false },
-    ],
-  },
-  {
-    id: 3,
-    answers: [
-      { answer: 'Answer7', isCorrect: true },
-      { answer: 'Answer8', isCorrect: false },
-      { answer: 'Answer9', isCorrect: false },
-    ],
-  },
-];
+import Video from 'react-native-video';
+import { quiz } from './mocks';
+import ExampleVideo from '../../assets/videos/video-example.mp4';
 
 const Quiz = ({
   navigation,
@@ -39,6 +15,7 @@ const Quiz = ({
     params: { title },
   },
 }) => {
+  const videoRef = useRef<Video>(null);
   const radioStyles = {
     borderColor: 'green',
     color: 'red',
@@ -70,14 +47,30 @@ const Quiz = ({
         ref={pagerRef}
         style={styles.page}
         initialPage={0}
-        scrollEnabled={false}>
+        scrollEnabled={false}
+        onPageSelected={() => {
+          setSelectedId(undefined);
+        }}>
         {quiz.map((item, index) => {
           return (
             <View
               key={item.id}
               style={{ justifyContent: 'space-between', gap: 20 }}>
               <View>
-                <View style={styles.video} />
+                <View style={styles.video}>
+                  <Video
+                    // Can be a URL or a local file.
+                    source={ExampleVideo}
+                    // Store reference
+                    ref={videoRef}
+                    // Callback when remote video is buffering
+                    onBuffer={() => {}}
+                    // Callback when video cannot be loaded
+                    onError={() => {}}
+                    style={styles.backgroundVideo}
+                    resizeMode="cover"
+                  />
+                </View>
                 <RadioGroup
                   radioButtons={item.answers.map((item, index) => ({
                     id: `${index}`,
@@ -93,7 +86,10 @@ const Quiz = ({
               </View>
               <TouchableOpacity
                 disabled={!selectedId}
-                style={styles.continueButton}
+                style={[
+                  styles.continueButton,
+                  { opacity: !selectedId ? 0.5 : 1 },
+                ]}
                 onPress={() => {
                   pagerRef?.current?.setPageWithoutAnimation(index + 1);
                 }}

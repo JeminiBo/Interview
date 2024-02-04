@@ -30,6 +30,9 @@ target 'Interview' do
 
   use_frameworks! :linkage => :static
   $RNFirebaseAsStaticFramework = true
+  # enable Video caching
+  $RNVideoUseVideoCaching=true
+  $RNVideoUseGoogleIMA=true
 
   use_react_native!(
     :path => config[:reactNativePath],

@@ -1,3 +1,6 @@
+declare module '*.mp4';
+declare module '*.mov';
+
 declare module '*.svg' {
   import React from 'react';
   import { SvgProps } from 'react-native-svg';
