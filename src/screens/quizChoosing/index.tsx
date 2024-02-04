@@ -11,7 +11,7 @@ const QuizChoosing = ({navigation}) => {
   const [selectedTopic, setSelectedTopic] = useState('');
   const goToQuiz = () => {
     navigation.goBack()
-    navigation.navigate('Quiz')
+    navigation.navigate('Quiz', { title: selectedTopic });
   }
   return (
     <ModalScreen>

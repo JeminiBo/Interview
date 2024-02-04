@@ -190,6 +190,12 @@ function MainDrawer() {
           }}
           initialParams={{ title: '' }}
         />
+        <Stack.Screen
+          name="TopicStatistic"
+          component={TopicsStatistic}
+          initialParams={{ title: '', progress: 0 }}
+          options={{ animation: 'none', headerShown: false }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
